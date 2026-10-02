@@ -33,6 +33,7 @@ public class Labor {
         anzahlPlaetze = neueAnzahlPlaetze;
     }
 
+
     public int getAnzahlPlaetze() {
         return anzahlPlaetze;
     }
