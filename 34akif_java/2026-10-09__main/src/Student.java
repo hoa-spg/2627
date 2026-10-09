@@ -1,6 +1,6 @@
 public class Student {
     private String name;
-    private char geschlecht; // 'm', 'w'
+    private char geschlecht; // 'm', 'w', 'd'
     private int geburtsJahr;
     private double durchschnittsNote;
 
@@ -40,7 +40,7 @@ public class Student {
     }
 
     public void setGeschlecht(char geschlecht) {
-        if (geschlecht == 'm' || geschlecht == 'w') {
+        if (geschlecht == 'm' || geschlecht == 'w' || geschlecht == 'd') {
             this.geschlecht = geschlecht;
         } else {
             System.out.println("FEHLER: ungueltiges Geschlecht: " + geschlecht);
@@ -86,11 +86,31 @@ public class Student {
         return jahr - this.geburtsJahr;
     }
 
+//    public void print() {
+//        if (geschlecht == 'm') {
+//            System.out.println(name + " (männlich), Geburtsjahr: " + geburtsJahr + ", Durschnitts-Note: " + durchschnittsNote);
+//        } else {
+//            if (geschlecht == 'w') {
+//                System.out.println(name + " (weiblich), Geburtsjahr: " + geburtsJahr + ", Durschnitts-Note: " + durchschnittsNote);
+//            } else {
+//                if (geschlecht == 'd') {
+//                    System.out.println(name + " (divers), Geburtsjahr: " + geburtsJahr + ", Durschnitts-Note: " + durchschnittsNote);
+//                } else {
+//                    System.out.println("FEHLER ungueltiger Wert bei Geschlecht " + geschlecht);
+//                }
+//            }
+//        }
+//    }
+
     public void print() {
         if (geschlecht == 'm') {
             System.out.println(name + " (männlich), Geburtsjahr: " + geburtsJahr + ", Durschnitts-Note: " + durchschnittsNote);
-        } else { // geschlecht == 'w'
+        } else if (geschlecht == 'w') {
             System.out.println(name + " (weiblich), Geburtsjahr: " + geburtsJahr + ", Durschnitts-Note: " + durchschnittsNote);
+        } else if (geschlecht == 'd') {
+            System.out.println(name + " (divers), Geburtsjahr: " + geburtsJahr + ", Durschnitts-Note: " + durchschnittsNote);
+        } else {
+            System.out.println("FEHLER ungueltiger Wert bei Geschlecht " + geschlecht);
         }
     }
 
