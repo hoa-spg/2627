@@ -5,6 +5,7 @@ void main() {
     // to see how IntelliJ IDEA suggests fixing it.
     TicketAutomat ta = new TicketAutomat("Spengergasse", 30);
 
+
 //    String ticketString = ta.ticketString();
 //    System.out.println(ticketString);
 
