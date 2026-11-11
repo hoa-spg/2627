@@ -140,12 +140,20 @@ public class Student {
         {
             return false;
         }
+        
+        // oder kürzer:
+        // return berechneAlter() >= 18;
     }
     
     public boolean istVolljaehrigImJahr(int jahr) 
     {
         return berechneAlterImJahr(jahr) >= 18;
     }
+    
+    // TODO HÜ (einfach)
+    // anrede()
+    // inskribieren()
+    // exmatrikulieren()
     
     public String generiereEmail() 
     {
@@ -159,12 +167,44 @@ public class Student {
             kuerzel += vorname.charAt(0);
         }
         
+        // TODO HÜ
+        // Hier muss noch geprüft werden, ob nur Groß- und 
+        // Kleinbuchstaben bzw. Umlaute und ß vorkommen.
+        // Idealerweise wird hierfür eine Methode 
+        //    private boolean istBuchstabe(char c)
+        // entwickelt.
+        
         Random rnd = new Random(); // 10000 99999
         int zz = 10000 + rnd.nextInt(90000);
         
         return kuerzel.toLowerCase() + zz + "@spengergasse.at";
         
     }
+    
+    // TODO
+    // Methode initialen2()
+    
+    // Lösung:
+    // Zusatz: Anna Al-Hassan -> "A. A.-H.", Eva van Dyk -> "E. V. D."
+    // keinen Code doppelt schreiben: zuerst initialen() aufrufen
+    // public String initialen2() {
+        // String ergebnis = initialen();
+
+        // if (istDoppelname()) {
+            // String trenner = "-";
+            // int pos = nachname.indexOf("-");
+            // if (pos == -1) { // kein Bindestrich, also Leerzeichen
+                // trenner = " ";
+                // pos = nachname.indexOf(" ");
+            // }
+            // // Achtung: nach dem Trenner muss noch ein Zeichen kommen (z.B. "Huber-")
+            // if (pos + 1 < nachname.length()) {
+                // ergebnis += trenner + nachname.substring(pos + 1, pos + 2).toUpperCase() + ".";
+            // }
+        // }
+        // return ergebnis;
+    // }
+
     
     public String toString() 
     {
