@@ -1,4 +1,4 @@
-void main(){
+void main() {
     //km1 ist die Kaffeemaschine 1 und ich habe sie verwendetzum testen aller Methoden außer dem kaffeeZubereiten
 
     Kaffeemaschine km1 = new Kaffeemaschine();
@@ -24,7 +24,7 @@ void main(){
 
     //der neue (1500) Wasserstand
     km1.wasserNachfuellen();
-    wasserStand= km1.getWasser();
+    wasserStand = km1.getWasser();
     System.out.println(wasserStand);
 
     //der Bohnenstand
