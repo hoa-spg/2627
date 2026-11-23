@@ -20,6 +20,7 @@ class KaffeemaschineTest {
         assertEquals(250, bohnen);
 
         km1.bohnenNachfuellen(200);
+
         assertEquals(450, km1.getBohnen());
     }
 
