@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.util.Random;
 
+
 public class Student {
 
     private String vorname;
@@ -31,7 +32,6 @@ public class Student {
     }
 
     public void setVorname(String vorname) {
-        // Reihenfolge wichtig: zuerst auf null pruefen, dann erst strip() aufrufen!
         if (vorname != null && vorname.strip().length() >= 2) {
             this.vorname = vorname.strip();
         } else {
@@ -82,51 +82,84 @@ public class Student {
 
 
     public void inskribieren() {
-        // TODO
+        if (!inskribiert) {
+            inskribiert = true;
+        } else {
+            System.out.println("Fehler: ist schon inskribiert.");
+        }
     }
 
     public void exmatrikulieren() {
-        // TODO
+        if (inskribiert) {
+            inskribiert = false;
+        } else {
+            System.out.println("Fehler: ist schon exmatrikuliert.");
+        }
     }
 
     // Max Mustermann -> "M. M."
     public String initialen() {
-        return ""; // TODO
+        return vorname.substring(0, 1).toUpperCase() + ". " + nachname.substring(0, 1).toUpperCase() + ".";
     }
 
     public boolean istDoppelname() {
-        return false; // TODO
+        return nachname.contains(" ") || nachname.contains("-");
     }
 
     // Alter im aktuellen Jahr: keinen Code doppelt schreiben,
     // sondern die Methode mit Parameter aufrufen
     public int berechneAlter() {
-        return -1; // TODO
+        return berechneAlterImJahr(LocalDate.now().getYear());
     }
 
     // liefert -1, wenn das Jahr vor dem Geburtsjahr liegt
     public int berechneAlterImJahr(int jahr) {
-        return -1; // TODO
+        if (jahr >= geburtsjahr) {
+            return jahr - geburtsjahr;
+        } else {
+            System.out.println("Fehler: " + jahr + " ist kleiner als Geburtsjahr " + geburtsjahr);
+            return -1;
+        }
     }
 
     public boolean istVolljaehrig() {
-        return false; // TODO
+        return istVolljaehrigImJahr(LocalDate.now().getYear());
     }
 
+    /**
+     * Diese Methode ermittelt, ob die Person im angegeben
+     * Jahr volljährig ist.
+     *
+     * @param jahr Jahr in dem auf Volljährigkeit geprüft wird
+     * @return gibt an ob Person volljährig ist oder nicht.
+     */
     public boolean istVolljaehrigImJahr(int jahr) {
-        // bei ungueltigem Jahr liefert berechneAlterImJahr -1, also false
-        return false; // TODO
+        return berechneAlterImJahr(jahr) >= 18;
     }
 
     public String anrede() {
-        return ""; // TODO
+        if (geschlecht == 'm') {
+            return "Sehr geehrter Herr " + nachname;
+        } else if (geschlecht == 'w') {
+            return "Sehr geehrte Frau " + nachname;
+        } else if (geschlecht == 'x') {
+            return "Guten Tag " + vorname + " " + nachname;
+        } else {
+            System.out.println("Fehler: ungueltiges Geschlecht: " + geschlecht);
+            return "";
+        }
     }
 
     // char-Werte koennen verglichen werden: 'a' bis 'z' und 'A' bis 'Z'
     // liegen jeweils direkt hintereinander, die Umlaute liegen ausserhalb
     // -> einzeln pruefen.
     private boolean istBuchstabe(char c) {
-        return false; // TODO
+        return (c >= 'A' && c <= 'Z')
+                || (c >= 'a' && c <= 'z')
+                || c == 'Ä' || c == 'ä'
+                || c == 'Ö' || c == 'ö'
+                || c == 'Ü' || c == 'ü'
+                || c == 'ß';
     }
 
     // E-Mail: 3 Buchstaben Nachname + 5 Zufallsziffern + @spengergasse.at
@@ -136,7 +169,27 @@ public class Student {
     // Die E-Mail wird nicht gespeichert: jeder Aufruf liefert andere Ziffern.
     // Im Fehlerfall wird null zurueckgegeben.
     public String generiereEmail() {
-        return ""; // TODO
+        String kuerzel = "";
+
+        if (nachname.length() >= 3) {
+            kuerzel = nachname.substring(0, 3);
+        } else {
+            kuerzel = nachname.substring(0, 2) + vorname.substring(0, 1);
+        }
+
+        if (istBuchstabe(kuerzel.charAt(0))
+                && istBuchstabe(kuerzel.charAt(1))
+                && istBuchstabe(kuerzel.charAt(2)))
+        {
+            Random rnd = new Random();
+            int zahl = rnd.nextInt(100_000);
+
+            return kuerzel.toLowerCase() + String.format("%05d", zahl) + "@spengergasse.at";
+        } else {
+            System.out.println("Fehler: ungueltige Zeichen im Namen.");
+            return "";
+        }
+
     }
 
     // Zusatz: Anna Al-Hassan -> "A. A.-H.", Eva van Dyk -> "E. V. D."
